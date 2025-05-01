@@ -49,7 +49,7 @@
         <h1>Hello, {{ $name }}!</h1>
         <p>Thank you for using our service. Please confirm your account below:</p>
         
-        <a href="http://127.0.0.1:8000/account/verify?code={{ $code }}&email={{ $email }}" class="btn">Click here to continue</a>
+        <a href="https://v-record.resteban.tech/account/verify?code={{ $code }}&email={{ $email }}" class="btn">Click here to continue</a>
 
         <p>If you did not request this email, please ignore it.</p>
         <p>If you have any questions, feel free to contact us.</p>

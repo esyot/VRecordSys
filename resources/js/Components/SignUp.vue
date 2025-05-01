@@ -1,5 +1,5 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { useForm, router } from "@inertiajs/vue3";
 import { useToast } from "vue-toastification";
 
 const form = useForm({
@@ -13,6 +13,12 @@ const submit = () => {
   const toast = useToast();
 
   form.post("/signup/submit", {
+    onSuccess: () => {
+      toast.success(
+        "Your account has been created successfully, please check your email for verification."
+      );
+      router.get("/login");
+    },
     onError: () => {
       toast.error(
         "There was an error with your submission, please check the fields correctly."
@@ -87,7 +93,7 @@ const submit = () => {
       type="submit"
       class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
     >
-      Log In
+      Submit
     </button>
   </form>
 </template>

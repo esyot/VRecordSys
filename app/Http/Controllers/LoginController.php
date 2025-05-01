@@ -61,7 +61,7 @@ class LoginController extends Controller
             'auth_code' => $code,
         ]);
 
-        return redirect()->back()->with('success', 'Verification code sent to your email.');
+        return redirect()->route('login')->with('success', 'Verification code sent to your email.');
 
     }
 
