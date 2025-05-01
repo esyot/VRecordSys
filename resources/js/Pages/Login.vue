@@ -1,13 +1,9 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { ref, defineProps } from "vue";
 import AboutModal from "@/Modals/AboutModal.vue";
-import { ref } from "vue";
+import Login from "@/Components/Login.vue";
+import SignUp from "@/Components/SignUp.vue";
 import { useToast } from "vue-toastification";
-
-const form = useForm({
-  email: "",
-  password: "",
-});
 
 const isOpenAboutModal = ref(false);
 
@@ -15,27 +11,22 @@ const toggleAboutModal = () => {
   isOpenAboutModal.value = !isOpenAboutModal.value;
 };
 
-function submit() {
-  const toast = useToast();
+const props = defineProps({
+  success: String,
+});
 
-  form.post("/login/submit", {
-    onSuccess: () => {
-      toast.success("You are logged in successfully!", {
-        position: "top-right",
-        duration: 3000,
-      });
-    },
-    onError: () => {
-      toast.error(
-        "There was an error logging in with your credentials, please check correctly!",
-        {
-          position: "top-right",
-          duration: 3000,
-        }
-      );
-    },
+if (props.success) {
+  const toast = useToast();
+  toast.success(props.success, {
+    position: "top-right",
+    duration: 3000,
   });
 }
+const selectedType = ref("login");
+
+const selectType = (action) => {
+  selectedType.value = action;
+};
 </script>
 
 <template>
@@ -47,47 +38,34 @@ function submit() {
         Welcome to <strong>V-Record</strong>!
         <i
           @mouseover="toggleAboutModal"
-          class="fas fa-circle-info hover:opacity-50 cursor-pointer text-gray-500"
+          class="fas fa-circle-info fa-sm hover:opacity-50 cursor-pointer text-gray-500"
         ></i>
       </h3>
-
-      <form @submit.prevent="submit">
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 mb-1" for="email"
-            >Email</label
-          >
-          <input
-            v-model="form.email"
-            placeholder="Input email"
-            type="email"
-            id="email"
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-            required
-            autofocus
-          />
-        </div>
-
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-1" for="password"
-            >Password</label
-          >
-          <input
-            v-model="form.password"
-            type="password"
-            placeholder="Input password"
-            id="password"
-            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-200"
-            required
-          />
-        </div>
-
+      <div class="flex justify-center">
         <button
-          type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+          @click="selectType('login')"
+          :class="
+            selectedType === 'login'
+              ? 'px-4 py-2 border hover:opacity-50 text-blue-500 '
+              : 'px-4 py-2 border hover:opacity-50 opacity-20'
+          "
         >
-          Log In
+          Login
         </button>
-      </form>
+        <button
+          @click="selectType('signup')"
+          :class="
+            selectedType === 'signup'
+              ? 'px-4 py-2 border hover:opacity-50 text-blue-500 '
+              : 'px-4 py-2 border hover:opacity-50 opacity-20'
+          "
+        >
+          Sign-Up
+        </button>
+      </div>
+      <Login v-if="selectedType === 'login'"></Login>
+
+      <SignUp v-if="selectedType === 'signup'"></SignUp>
     </div>
   </div>
 </template>

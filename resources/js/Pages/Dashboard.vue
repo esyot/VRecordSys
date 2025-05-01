@@ -117,7 +117,15 @@ const formatDate = (dateString) => {
           <tbody>
             <tr v-for="(vehicle, index) in vehicles.data" :key="index">
               <td class="py-2 px-4 border-b">{{ vehicle.plate_no }}</td>
-              <td class="py-2 px-4 border-b text-green-600">{{ vehicle.type }}</td>
+              <td
+                :class="
+                  vehicle.type === 'check-in'
+                    ? 'py-2 px-4 border-b text-green-600'
+                    : 'py-2 px-4 border-b text-red-600'
+                "
+              >
+                {{ vehicle.type }}
+              </td>
               <td class="py-2 px-4 border-b">{{ formatDate(vehicle.created_at) }}</td>
             </tr>
           </tbody>

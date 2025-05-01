@@ -9,7 +9,7 @@ use App\Http\Middleware\EnsureAuthenticated;
 
 Route::middleware([EnsureAuthenticated::class])->group(function () {
 
-    Route::get('/', [VehicleController::class, 'index']);
+    Route::get('/', [VehicleController::class, 'index'])->name('home');
     Route::get('/dashboard/{data}', [VehicleController::class, 'index']);
     Route::post('/vehicle/submit', [VehicleController::class, 'create']);
 
@@ -24,6 +24,9 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login/submit', [LoginController::class, 'login']);
 
 
+Route::post('/signup/submit', [LoginController::class, 'signup']);
+
+Route::get('account/verify', [LoginController::class, 'verify'])->name('verify');
 
 Route::get('/logout', function () {
     Auth::logout();

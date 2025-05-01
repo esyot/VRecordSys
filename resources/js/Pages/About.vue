@@ -20,7 +20,8 @@ const props = defineProps({
       </p>
 
       <p class="mb-4">
-        Built using <span class="font-semibold">Vue.js</span> and styled with
+        Built using <span class="font-semibold">Vue.js</span>, powered by
+        <span class="font-semibold">Inertia.js</span>, and styled with
         <span class="font-semibold">Tailwind CSS</span>, this project emphasizes
         responsive design, clean code, and functional implementation suitable for
         real-world applications.

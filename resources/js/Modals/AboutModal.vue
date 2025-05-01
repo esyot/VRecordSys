@@ -13,7 +13,7 @@ const closeModal = () => {
     class="flex fixed justify-center items-center inset-0 bg-gray-800 bg-opacity-50 z-50"
   >
     <section
-      class="bg-white max-w-3xl mx-auto p-6 text-gray-800 rounded-xl shadow"
+      class="bg-white max-w-3xl p-6 text-gray-800 rounded-xl shadow mx-4"
       @mouseleave="closeModal"
     >
       <p class="mb-4">
